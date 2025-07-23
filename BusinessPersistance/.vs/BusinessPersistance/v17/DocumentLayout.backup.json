@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6AC31C2E-0637-41C6-AA23-3FE3A5FBBF40}|Persistence\\Persistence.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\persistence\\persistence.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6AC31C2E-0637-41C6-AA23-3FE3A5FBBF40}|Persistence\\Persistence.csproj|solutionrelative:persistence\\persistence.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\businesspersistance\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|solutionrelative:businesspersistance\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\businesspersistance\\middleware\\globalexceptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|solutionrelative:businesspersistance\\middleware\\globalexceptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\businesspersistance\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|solutionrelative:businesspersistance\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\application\\implementations\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|solutionrelative:application\\implementations\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\application\\interfaces\\imessageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|solutionrelative:application\\interfaces\\imessageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\application\\mapper\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2E2C14B-C205-48F8-A532-78BAB68BDF90}|Application\\Application.csproj|solutionrelative:application\\mapper\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|c:\\users\\gusta\\documents\\whatsapp bot\\business-management-persistance\\businesspersistance\\businesspersistance\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE521B5-F668-4BE4-A4FB-6E889B7C9A3F}|BusinessPersistance\\BusinessPersistance.csproj|solutionrelative:businesspersistance\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Persistence",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Persistence\\Persistence.csproj",
+              "RelativeDocumentMoniker": "Persistence\\Persistence.csproj",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Persistence\\Persistence.csproj",
+              "RelativeToolTip": "Persistence\\Persistence.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-23T00:36:26.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Program.cs",
+              "RelativeDocumentMoniker": "BusinessPersistance\\Program.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Program.cs",
+              "RelativeToolTip": "BusinessPersistance\\Program.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:41:34.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GlobalExceptionHandler.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Middleware\\GlobalExceptionHandler.cs",
+              "RelativeDocumentMoniker": "BusinessPersistance\\Middleware\\GlobalExceptionHandler.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Middleware\\GlobalExceptionHandler.cs",
+              "RelativeToolTip": "BusinessPersistance\\Middleware\\GlobalExceptionHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:53:21.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\appsettings.json",
+              "RelativeDocumentMoniker": "BusinessPersistance\\appsettings.json",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\appsettings.json",
+              "RelativeToolTip": "BusinessPersistance\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-22T21:50:10.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IMessageService.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Interfaces\\IMessageService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IMessageService.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Interfaces\\IMessageService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IMessageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:47:10.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AutoMapperProfile.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Mapper\\AutoMapperProfile.cs",
+              "RelativeDocumentMoniker": "Application\\Mapper\\AutoMapperProfile.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Mapper\\AutoMapperProfile.cs",
+              "RelativeToolTip": "Application\\Mapper\\AutoMapperProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:44:43.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MessageService.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Implementations\\MessageService.cs",
+              "RelativeDocumentMoniker": "Application\\Implementations\\MessageService.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\Application\\Implementations\\MessageService.cs",
+              "RelativeToolTip": "Application\\Implementations\\MessageService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:44:08.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MessageController.cs",
+              "DocumentMoniker": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Controllers\\MessageController.cs",
+              "RelativeDocumentMoniker": "BusinessPersistance\\Controllers\\MessageController.cs",
+              "ToolTip": "C:\\Users\\gusta\\Documents\\Whatsapp Bot\\business-management-persistance\\BusinessPersistance\\BusinessPersistance\\Controllers\\MessageController.cs",
+              "RelativeToolTip": "BusinessPersistance\\Controllers\\MessageController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAIA1wDAAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T21:15:43.627Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
