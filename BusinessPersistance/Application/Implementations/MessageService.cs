@@ -24,6 +24,11 @@ namespace Application.Implementations
             _mapper = mapper;
         }
 
+        public async Task<bool> GetDbStatus()
+        {
+            return await _context.Database.CanConnectAsync();
+        }
+
         public async Task<IEnumerable<MessageResponseDto>> GetAllByMessageIdAsync(String id)
         {
             var messageList = await _context.Messages.Where(message => message.MessageId == id).ToListAsync();

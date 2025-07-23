@@ -3,6 +3,7 @@ using Domain.Dtos.Request;
 using Domain.Dtos.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BusinessPersistance.Controllers
 {
@@ -17,11 +18,41 @@ namespace BusinessPersistance.Controllers
             _messageService = messageService;
         }
 
-        /*[HttpGet]
-        public IActionResult GetStatus()
+        [HttpGet]
+        public IActionResult GetApiStatus()
         {
+            return Ok(new ResponseDto<string>
+            {
+                Success = true,
+                Message = "Status OK!",
+                StatusCode = (int)HttpStatusCode.OK,
+            });
+        }
 
-        }*/
+        [HttpGet]
+        public async Task<IActionResult> GetDbStatus()
+        {
+            try
+            {
+                var response = await _messageService.GetDbStatus();
+                return Ok(new ResponseDto<string>
+                {
+                    Success = response,
+                    Message = response ? "Status OK!" : "Status Bad",
+                    StatusCode = response ? (int)HttpStatusCode.OK : (int)HttpStatusCode.InternalServerError,
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ErrorResponseDto
+                {
+                    Title = HttpStatusCode.InternalServerError.ToString(),
+                    Success = false,
+                    Message = "An error ocurred while connecting to Database " + ex.Message,
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                });
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMessageByIdAsync(String id)

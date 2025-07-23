@@ -5,6 +5,7 @@ namespace Application.Interfaces
 {
     public interface IMessageService
     {
+        Task<bool> GetDbStatus();
         Task<MessageResponseDto> GetByIdAsync(Guid id);
         Task<IEnumerable<MessageResponseDto>> GetAllByMessageIdAsync(String id);
         Task<MessageResponseDto> CreateMessageAsync(MessageRequestDto messageDto);
