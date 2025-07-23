@@ -1,15 +1,14 @@
 ﻿using Domain.Dtos.Request;
-using Domain.Models;
-using System.Data;
+using Domain.Dtos.Response;
 
 namespace Application.Interfaces
 {
     public interface IMessageService
     {
-        Task<Message> GetByIdAsync(Guid id);
-        Task<IEnumerable<Message>> GetAllByMessageIdAsync(String id);
-        Task CreateMessageAsync(MessageDto messageDto);
-        Task UpdateMessageAsync(Guid id, MessageDto updatedMessage);
+        Task<MessageResponseDto> GetByIdAsync(Guid id);
+        Task<IEnumerable<MessageResponseDto>> GetAllByMessageIdAsync(String id);
+        Task<MessageResponseDto> CreateMessageAsync(MessageRequestDto messageDto);
+        Task<MessageResponseDto> UpdateMessageAsync(Guid id, MessageRequestDto updatedMessage);
         Task DeleteMessageAsync(Guid id);
 
     }

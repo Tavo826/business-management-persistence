@@ -2,6 +2,7 @@
 using Domain.Dtos.Request;
 using Domain.Dtos.Response;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace BusinessPersistance.Controllers
 {
@@ -22,7 +23,7 @@ namespace BusinessPersistance.Controllers
 
         }*/
 
-        [HttpGet("{id:string}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetMessageByIdAsync(String id)
         {
             try
@@ -30,30 +31,37 @@ namespace BusinessPersistance.Controllers
                 var messageList = await _messageService.GetAllByMessageIdAsync(id);
                 if (messageList == null || !messageList.Any())
                 {
-                    return Ok(new
+                    return NotFound(new ErrorResponseDto
                     {
-                        message = "Messages not found"
+                        Title = HttpStatusCode.NotFound.ToString(),
+                        Success = false,
+                        Message = "Messages not found",
+                        StatusCode = (int)HttpStatusCode.NotFound
                     });
                 }
 
-                return Ok(new
+                return Ok(new ResponseDto<IEnumerable<MessageResponseDto>>
                 {
-                    message = "Successfully retrieve message",
-                    data = messageList
+                    Success = true,
+                    Message = $"Messages associated to {id} successfully retrieved",
+                    StatusCode = (int)HttpStatusCode.OK,
+                    Data = messageList
                 });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
+                return StatusCode(500, new ErrorResponseDto
                 {
-                    message = "An error ocurred while retrieving the message",
-                    error = ex.Message
+                    Title = HttpStatusCode.InternalServerError.ToString(),
+                    Success = false,
+                    Message = "An error ocurred while retrieving the message " + ex.Message,
+                    StatusCode= (int)HttpStatusCode.InternalServerError
                 });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMessageAsync(MessageDto messageDto)
+        public async Task<IActionResult> CreateMessageAsync(MessageRequestDto messageDto)
         {
             if (!ModelState.IsValid)
             {
@@ -62,24 +70,29 @@ namespace BusinessPersistance.Controllers
 
             try
             {
-                await _messageService.CreateMessageAsync(messageDto);
-                return Ok(new
+                var message = await _messageService.CreateMessageAsync(messageDto);
+                return Created(message.Id.ToString(), new ResponseDto<MessageResponseDto>
                 {
-                    message = "Message succesfully saved"
+                    Success = true,
+                    Message = "Message successfully created",
+                    StatusCode = (int)HttpStatusCode.OK,
+                    Data = message
                 });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
+                return StatusCode(500, new ErrorResponseDto
                 {
-                    message = "An error ocurred while saving the message",
-                    error = ex.Message
+                    Title = HttpStatusCode.InternalServerError.ToString(),
+                    Success = false,
+                    Message = "An error ocurred while creating the message " + ex.Message,
+                    StatusCode = (int)HttpStatusCode.InternalServerError
                 });
             }            
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> UpdateMessageAsync(Guid id, MessageDto messageDto)
+        public async Task<IActionResult> UpdateMessageAsync(Guid id, MessageRequestDto messageDto)
         {
             if (!ModelState.IsValid)
             {
@@ -91,25 +104,35 @@ namespace BusinessPersistance.Controllers
                 var message = await _messageService.GetByIdAsync(id);
                 if (message == null)
                 {
-                    return NotFound(new
+                    return NotFound(new ErrorResponseDto
                     {
-                        message = $"Message with id {id} not found"
+                        Title = HttpStatusCode.NotFound.ToString(),
+                        Success = false,
+                        Message = $"Message with id {id} not found",
+                        StatusCode = (int)HttpStatusCode.NotFound
                     });
                 }
 
-                await _messageService.UpdateMessageAsync(id, messageDto);
+                var updatedMessage = await _messageService.UpdateMessageAsync(id, messageDto);
 
-                return Ok(new
+
+                return Ok(new ResponseDto<MessageResponseDto>
                 {
-                    message = $"Message with id {id} successfully updated"
+                    Success = true,
+                    Message = $"Message with id {id} successfully updated",
+                    StatusCode = (int)HttpStatusCode.OK,
+                    Data = updatedMessage
                 });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
+
+                return StatusCode(500, new ErrorResponseDto
                 {
-                    message = $"An error ocurred while updating the message with id {id}",
-                    error = ex.Message
+                    Title = HttpStatusCode.InternalServerError.ToString(),
+                    Success = false,
+                    Message = $"An error ocurred while updating the message with id {id}" + ex.Message,
+                    StatusCode = (int)HttpStatusCode.InternalServerError
                 });
             }
         }
@@ -121,17 +144,23 @@ namespace BusinessPersistance.Controllers
             {
                 await _messageService.DeleteMessageAsync(id);
 
-                return Ok(new
+                return Ok(new ResponseDto<Guid>
                 {
-                    message = $"Message with id {id} successfully deleted"
+                    Success = true,
+                    Message = $"Message with id {id} successfully deleted",
+                    StatusCode = (int)HttpStatusCode.OK,
+                    Data = id
                 });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
+
+                return StatusCode(500, new ErrorResponseDto
                 {
-                    message = $"An error ocurred while deleting the message with id {id}",
-                    error = ex.Message
+                    Title = HttpStatusCode.InternalServerError.ToString(),
+                    Success = false,
+                    Message = $"An error ocurred while deleting the message with id {id}" + ex.Message,
+                    StatusCode = (int)HttpStatusCode.InternalServerError
                 });
             }
         }

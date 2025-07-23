@@ -1,17 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Domain.Dtos.Request
+﻿namespace Domain.Dtos.Response
 {
-    public class MessageDto
+    public class MessageResponseDto
     {
-        [Required]
+        public Guid Id { get; set; }
         public string MessageId { get; set; }
-        [Required]
-        [StringLength(500)]
         public string ReceivedMessage { get; set; }
-        [Required]
         public string SenderPhone { get; set; }
-        [Required]
         public string ResponseMessage { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
