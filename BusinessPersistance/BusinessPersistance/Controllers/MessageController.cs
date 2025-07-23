@@ -22,24 +22,24 @@ namespace BusinessPersistance.Controllers
 
         }*/
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetMessageByIdAsync(Guid id)
+        [HttpGet("{id:string}")]
+        public async Task<IActionResult> GetMessageByIdAsync(String id)
         {
             try
             {
-                var message = await _messageService.GetByIdAsync(id);
-                if (message == null)
+                var messageList = await _messageService.GetAllByMessageIdAsync(id);
+                if (messageList == null || !messageList.Any())
                 {
                     return Ok(new
                     {
-                        message = "Message not found"
+                        message = "Messages not found"
                     });
                 }
 
                 return Ok(new
                 {
                     message = "Successfully retrieve message",
-                    data = message
+                    data = messageList
                 });
             }
             catch (Exception ex)
@@ -76,6 +76,64 @@ namespace BusinessPersistance.Controllers
                     error = ex.Message
                 });
             }            
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateMessageAsync(Guid id, MessageDto messageDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var message = await _messageService.GetByIdAsync(id);
+                if (message == null)
+                {
+                    return NotFound(new
+                    {
+                        message = $"Message with id {id} not found"
+                    });
+                }
+
+                await _messageService.UpdateMessageAsync(id, messageDto);
+
+                return Ok(new
+                {
+                    message = $"Message with id {id} successfully updated"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"An error ocurred while updating the message with id {id}",
+                    error = ex.Message
+                });
+            }
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteMessageAsync(Guid id)
+        {
+            try
+            {
+                await _messageService.DeleteMessageAsync(id);
+
+                return Ok(new
+                {
+                    message = $"Message with id {id} successfully deleted"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"An error ocurred while deleting the message with id {id}",
+                    error = ex.Message
+                });
+            }
         }
 
     }

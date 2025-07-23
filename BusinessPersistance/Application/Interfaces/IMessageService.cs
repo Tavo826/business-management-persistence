@@ -7,9 +7,10 @@ namespace Application.Interfaces
     public interface IMessageService
     {
         Task<Message> GetByIdAsync(Guid id);
+        Task<IEnumerable<Message>> GetAllByMessageIdAsync(String id);
         Task CreateMessageAsync(MessageDto messageDto);
-        Task UpdateMessage(Guid id, MessageDto updatedMessage);
-        Task DeleteMessage(Guid id);
+        Task UpdateMessageAsync(Guid id, MessageDto updatedMessage);
+        Task DeleteMessageAsync(Guid id);
 
     }
 }
