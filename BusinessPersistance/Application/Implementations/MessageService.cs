@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
 using System.Data;
-using System.Net.WebSockets;
 
 namespace Application.Implementations
 {
@@ -120,7 +119,7 @@ namespace Application.Implementations
         {
             var message = await _context.Messages.FindAsync(id);
 
-            if ( message == null )
+            if (message == null)
             {
                 throw new KeyNotFoundException($" No message with id {id} found");
             }

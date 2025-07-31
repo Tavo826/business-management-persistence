@@ -3,7 +3,6 @@ using Domain.Dtos.Request;
 using Domain.Dtos.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace BusinessPersistance.Controllers
 {
@@ -86,7 +85,7 @@ namespace BusinessPersistance.Controllers
                     Title = HttpStatusCode.InternalServerError.ToString(),
                     Success = false,
                     Message = "An error ocurred while retrieving the message " + ex.Message,
-                    StatusCode= (int)HttpStatusCode.InternalServerError
+                    StatusCode = (int)HttpStatusCode.InternalServerError
                 });
             }
         }
@@ -102,6 +101,7 @@ namespace BusinessPersistance.Controllers
             try
             {
                 var message = await _messageService.CreateMessageAsync(messageDto);
+
                 return Created(message.Id.ToString(), new ResponseDto<MessageResponseDto>
                 {
                     Success = true,
@@ -119,7 +119,7 @@ namespace BusinessPersistance.Controllers
                     Message = "An error ocurred while creating the message " + ex.Message,
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 });
-            }            
+            }
         }
 
         [HttpPut("{id:guid}")]
