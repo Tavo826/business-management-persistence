@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  miapp:
+    build: .
+    container_name: miapp
+    ports:
+      - "${PORT}:8080"
+    environment:
+      - DbSettings__ConnectionString=${DbSettings__ConnectionString}
+    restart: always

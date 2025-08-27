@@ -41,8 +41,8 @@ ScaffoldingReadMe.txt
 *~
 CodeCoverage/
 .vs/
-docker-compose.yml
 appsettings.json
+.env
 
 # MSBuild Binary and Structured Log
 *.binlog
