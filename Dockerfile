@@ -5,8 +5,10 @@ WORKDIR /src
 # Copiar csproj para aprovechar cache
 COPY ["BusinessPersistance/BusinessPersistance/BusinessPersistance.csproj", "BusinessPersistance/"]
 COPY ["BusinessPersistance/Persistence/Persistence.csproj", "Persistence/"]
+COPY ["BusinessPersistance/Domain/Domain.csproj", "Domain/"]
+COPY ["BusinessPersistance/Application/Application.csproj", "Application/"]
 
-RUN dotnet restore "BusinessPersistance/BusinessPersistance.csproj"
+RUN dotnet restore "BusinessPersistance/BusinessPersistance/BusinessPersistance.csproj"
 
 # Copiar el resto del código
 COPY . .
