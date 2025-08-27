@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  miapp:
+  business-persistence:
     build: .
-    container_name: miapp
+    container_name: business-persistence
     ports:
       - "${PORT}:8080"
     environment:
