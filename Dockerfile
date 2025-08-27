@@ -1,28 +1,34 @@
-# -------- Build stage --------
+# Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar csproj para aprovechar cache
-COPY ["BusinessPersistence/BusinessPersistence/BusinessPersistence.csproj", "BusinessPersistence/"]
-COPY ["BusinessPersistence/Persistence/Persistence.csproj", "Persistence/"]
-COPY ["BusinessPersistence/Domain/Domain.csproj", "Domain/"]
-COPY ["BusinessPersistence/Application/Application.csproj", "Application/"]
+# Copiar primero los archivos de proyecto (.csproj) para aprovechar la cache
+COPY ["BusinessPersistence/BusinessPersistence/BusinessPersistence.csproj", "BusinessPersistence/BusinessPersistence/"]
+COPY ["BusinessPersistence/Application/Application.csproj", "BusinessPersistence/Application/"]
+COPY ["BusinessPersistence/Domain/Domain.csproj", "BusinessPersistence/Domain/"]
+COPY ["BusinessPersistence/Persistence/Persistence.csproj", "BusinessPersistence/Persistence/"]
 
+# Restaurar dependencias
 RUN dotnet restore "BusinessPersistence/BusinessPersistence/BusinessPersistence.csproj"
 
-# Copiar el resto del código
+# Copiar todo el código
 COPY . .
 
-# Publicar la app
-RUN dotnet publish "BusinessPersistence/BusinessPersistence/BusinessPersistence.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# Build
+WORKDIR "/src/BusinessPersistence/BusinessPersistence"
+RUN dotnet build "BusinessPersistence.csproj" -c Release -o /app/build
 
-# -------- Runtime stage --------
+# Publish
+FROM build AS publish
+RUN dotnet publish "BusinessPersistence.csproj" -c Release -o /app/publish
+
+# Imagen final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 ENV DOTNET_EnableDiagnostics=0
 
-COPY --from=build /app/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BusinessPersistence.dll"]
+
