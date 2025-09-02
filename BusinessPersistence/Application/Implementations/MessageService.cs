@@ -1,57 +1,50 @@
 ﻿using Application.Interfaces;
-using AutoMapper;
+using Application.Mapper;
 using Domain.Dtos.Request;
 using Domain.Dtos.Response;
-using Domain.Models;
-using Microsoft.EntityFrameworkCore;
+using Domain.Exceptions;
 using Microsoft.Extensions.Logging;
-using Persistence;
 
 namespace Application.Implementations
 {
     public class MessageService : IMessageService
     {
-        private readonly MessageDbContext _context;
+        private readonly IMessageRepository _messageRepository;
         private readonly ILogger<MessageService> _logger;
-        private readonly IMapper _mapper;
 
-        public MessageService(MessageDbContext context, ILogger<MessageService> logger, IMapper mapper)
+        public MessageService(IMessageRepository messageRepository, ILogger<MessageService> logger)
         {
-            _context = context;
+            _messageRepository = messageRepository;
             _logger = logger;
-            _mapper = mapper;
         }
 
         public async Task<bool> GetDbStatus()
         {
-            return await _context.Database.CanConnectAsync();
+            return await _messageRepository.GetStatus();
         }
 
         public async Task<IEnumerable<MessageResponseDto>> GetAllByMessageIdAsync(String id)
         {
-            var messageList = await _context.Messages.Where(message => message.MessageId == id).ToListAsync();
+            var messageList = await _messageRepository.GetAllByMessageIdAsync(id);
 
-            if (messageList == null)
+            if (!messageList.Any())
             {
-                throw new Exception("No messages found");
+                throw new MessageNotFoundException($"No messages found with id {id}");
             }
 
-            return _mapper.Map<IEnumerable<MessageResponseDto>>(messageList);
+            return DtoMapper.toDtoList(messageList);
         }
 
         public async Task<MessageResponseDto> CreateMessageAsync(MessageRequestDto messageDto)
         {
             try
             {
-                var message = _mapper.Map<Message>(messageDto);
+                var message = DtoMapper.toDomain(messageDto);
                 message.CreatedAt = DateTime.UtcNow;
-                var savedMessage = _context.Messages.Add(message);
 
-                await _context.SaveChangesAsync();
+                var savedMessage = await _messageRepository.Add(message);
 
-                message.Id = savedMessage.Entity.Id;
-
-                return _mapper.Map<MessageResponseDto>(message);
+                return DtoMapper.toDto(savedMessage);
             }
             catch (Exception ex)
             {
@@ -59,38 +52,22 @@ namespace Application.Implementations
                 throw new Exception("An error ocurred while creating the message");
             }
         }
-        public async Task<MessageResponseDto> UpdateMessageAsync(Guid id, MessageRequestDto updatedMessage)
+        public async Task<MessageResponseDto> UpdateMessageAsync(Guid id, MessageRequestDto messageToUpdateDto)
         {
             try
             {
-                var message = await _context.Messages.FindAsync(id);
+                var message = await _messageRepository.GetById(id);
+
                 if (message == null)
                 {
-                    throw new Exception($"No message found with id {id}");
+                    throw new MessageNotFoundException($"No message found with id {id}");
                 }
 
-                if (updatedMessage.MessageId != null)
-                {
-                    message.MessageId = updatedMessage.MessageId;
-                }
-                if (updatedMessage.ReceivedMessage != null)
-                {
-                    message.ReceivedMessage = updatedMessage.ReceivedMessage;
-                }
-                if (updatedMessage.SenderPhone != null)
-                {
-                    message.SenderPhone = updatedMessage.SenderPhone;
-                }
-                if (updatedMessage.ResponseMessage != null)
-                {
-                    message.ResponseMessage = updatedMessage.ResponseMessage;
-                }
+                var messageToUpdate = DtoMapper.toDomain(messageToUpdateDto);
 
-                message.UpdatedAt = DateTime.UtcNow;
+                var updatedMessage = await _messageRepository.Update(messageToUpdate, message);
 
-                await _context.SaveChangesAsync();
-
-                return _mapper.Map<MessageResponseDto>(message);
+                return DtoMapper.toDto(updatedMessage);
             }
             catch (Exception ex)
             {
@@ -101,29 +78,14 @@ namespace Application.Implementations
 
         public async Task DeleteMessageAsync(Guid id)
         {
-            var message = await _context.Messages.FindAsync(id);
-
-            if (message != null)
-            {
-                _context.Messages.Remove(message);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new Exception($" No message found with id {id}");
-            }
-        }
-
-        public async Task<MessageResponseDto> GetByIdAsync(Guid id)
-        {
-            var message = await _context.Messages.FindAsync(id);
+            var message = await _messageRepository.GetById(id);
 
             if (message == null)
             {
-                throw new KeyNotFoundException($" No message with id {id} found");
+                throw new MessageNotFoundException($"No message found with id {id}");
             }
 
-            return _mapper.Map<MessageResponseDto>(message);
+            await _messageRepository.Delete(message);
         }
     }
 }

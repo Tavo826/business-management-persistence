@@ -1,29 +1,37 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Persistence.data;
 
 namespace Persistence
 {
     public class MessageDbContext : DbContext
     {
-        private readonly DbSettings _dbSettings;
+        private readonly string _connectionString;
 
-        public MessageDbContext(IOptions<DbSettings> dbSettings)
+        public MessageDbContext(DbContextOptions<MessageDbContext> options) : base(options)
         {
-            _dbSettings = dbSettings.Value;
         }
 
-        public DbSet<Message> Messages { get; set; }
+        public MessageDbContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public DbSet<MessageData> Messages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_dbSettings.ConnectionString);
+            if (!string.IsNullOrEmpty(_connectionString))
+            {
+                optionsBuilder.UseNpgsql(_connectionString);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Message>()
-                .ToTable("Message")
+            modelBuilder.Entity<MessageData>()
+                .ToTable("messages")
                 .HasKey(m => m.Id);
         }
     }

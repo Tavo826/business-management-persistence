@@ -1,11 +1,29 @@
 version: '3.9'
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: ${DbSettings__User}
+      POSTGRES_PASSWORD: ${DbSettings__Password}
+      POSTGRES_DB: ${DbSettings__DB}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DbSettings__User} -d ${DbSettings__DB}"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 20s
   business-persistence:
     build: .
     container_name: business-persistence
     ports:
       - "${PORT}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       - DbSettings__ConnectionString=${DbSettings__ConnectionString}
     restart: always

@@ -16,27 +16,26 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection(nameof(DbSettings)));
 builder.Services.AddDbContext<MessageDbContext>(options =>
-{
-    var dbSettings = builder.Configuration.GetSection(nameof(DbSettings)).Get<DbSettings>();
-    options.UseSqlServer(dbSettings.ConnectionString);
-});
-
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic));
-});
+    options.UseNpgsql(builder.Configuration.GetSection("DbSettings:ConnectionString").Value));
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
 
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 
 var app = builder.Build();
 
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider;
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MessageDbContext>();
+    db.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.

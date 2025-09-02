@@ -1,4 +1,5 @@
 ﻿using Domain.Dtos.Response;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
@@ -29,7 +30,10 @@ namespace BusinessPersistence.Middleware
                     errorResponse.StatusCode = (int)HttpStatusCode.BadRequest;
                     errorResponse.Title = exception.GetType().Name;
                     break;
-
+                case MessageNotFoundException:
+                    errorResponse.StatusCode = (int)HttpStatusCode.NotFound;
+                    errorResponse.Title = exception.GetType().Name;
+                    break;
                 default:
                     errorResponse.StatusCode = (int)HttpStatusCode.InternalServerError;
                     errorResponse.Title = "Internal Server Error";
